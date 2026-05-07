@@ -2788,7 +2788,7 @@
       const comments = liveNum(v['댓글수']);
       const engagements = liveNum(v['참여수']) || likes + comments;
       const videoId = String(v['영상ID'] || '').trim();
-      const type = String(v['영상유형'] || '').trim() || liveDetectType(liveNum(v['영상길이_초']), String(v['영상URL'] || ''), String(v['영상제목'] || ''));
+      const type = liveNormalizeVideoType(String(v['영상유형'] || '').trim()) || liveDetectType(liveNum(v['영상길이_초']), String(v['영상URL'] || ''), String(v['영상제목'] || ''));
 
       return {
         game: String(v['게임'] || '').toUpperCase(),
@@ -2844,7 +2844,7 @@
 
       let scoped = LIVE_RAW.videos.slice();
       if (filters.game !== 'ALL') scoped = scoped.filter(v => v.game === filters.game);
-      if (filters.type !== 'ALL') scoped = scoped.filter(v => v.type === filters.type);
+      if (filters.type !== 'ALL') scoped = scoped.filter(v => liveNormalizeVideoType(v.type) === liveNormalizeVideoType(filters.type));
       if (filters.tier !== 'ALL') scoped = scoped.filter(v => filters.tier === '미분류' ? !v.tier : v.tier === filters.tier);
 
       const availableMonths = liveAggregateMonthly(scoped).slice().sort((a, b) => b.month.localeCompare(a.month));
@@ -3269,6 +3269,16 @@
       const d = liveParseDate(v);
       if (!d) return 1;
       return Math.max(1, Math.ceil((Date.now() - d.getTime()) / 86400000));
+    }
+
+    function liveNormalizeVideoType(value) {
+      const text = String(value || '').trim().toLowerCase();
+
+      if (!text) return '';
+      if (text === 'shorts' || text === 'short' || text === '쇼츠') return 'Shorts';
+      if (text === 'vod' || text === 'long' || text === 'longform' || text === '롱폼') return 'VOD';
+
+      return value;
     }
 
     function liveDetectType(seconds, url, title) {
