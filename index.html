@@ -2850,13 +2850,21 @@
       const availableMonths = liveAggregateMonthly(scoped).slice().sort((a, b) => b.month.localeCompare(a.month));
       if (filters.period === 'MONTH' && !filters.month && availableMonths[0]) filters.month = availableMonths[0].month;
 
+      // 기간 필터 적용 전 데이터를 따로 보관해 성장/상승 값을 계산합니다.
+      // 기존 Apps Script 웹앱에서는 서버에서 계산되던 값이라, 외부 HTML 버전에서는 여기서 직접 계산해야 합니다.
+      const scopedBeforePeriod = scoped.slice();
+
       if (filters.period === 'RECENT') scoped = scoped.filter(v => {
         const d = liveParseDate(v.publishedAt);
         return d && d >= recentCutoff;
       });
       if (filters.period === 'MONTH' && filters.month) scoped = scoped.filter(v => String(v.publishedAt || '').slice(0, 7) === filters.month);
 
-      const optionCreators = liveAggregateCreators(scoped);
+      const optionCreators = liveAttachGrowth(
+        liveAggregateCreators(scoped),
+        scopedBeforePeriod,
+        filters
+      );
       const creatorOptions = optionCreators.map(c => ({
         key: c.key,
         label: `${c.creatorName} (${c.game} · ${c.tier || '미분류'})`,
@@ -2868,7 +2876,11 @@
         videos = scoped.filter(v => liveCreatorKey(v) === filters.creator);
       }
 
-      const creators = liveAggregateCreators(videos);
+      const creators = liveAttachGrowth(
+        liveAggregateCreators(videos),
+        scopedBeforePeriod,
+        filters
+      );
       const totals = liveAggregateTotals(videos, creators);
       const topVideos = videos.slice().sort((a, b) => b.views - a.views).map(liveVideoForDashboard);
       const recent30TopVideos = topVideos.slice(0, 3);
@@ -2890,7 +2902,7 @@
         tierPerformance: liveAggregateGroup(videos, 'tier').map(g => Object.assign(g, { tier: g.label || '미분류' })),
         weekdayUploads: liveAggregateWeekdays(videos),
         durationBuckets: liveAggregateDurations(videos),
-        risingCreators: creators.slice(0, 20).map(c => Object.assign({}, c, { growth: c.views, latestViews: c.views, isFallback: true })),
+        risingCreators: creators.slice().sort((a, b) => (b.growth || 0) - (a.growth || 0)).slice(0, 20),
         recommendedCreators: liveBuildRecommendedCreators(creators),
         subscriberEfficiency: liveBuildEfficiency(creators),
         managementAlerts: liveBuildAlerts(creators),
@@ -3148,6 +3160,65 @@
       return { type: '균형형', description: 'VOD와 Shorts를 함께 활용하는 균형형 크리에이터입니다.', vodShare, shortsShare: shortShare };
     }
 
+    function liveAttachGrowth(creators, scopedBeforePeriod, filters) {
+      const comparisonMap = liveBuildComparisonCreatorMap(scopedBeforePeriod, filters);
+
+      return creators.map(c => {
+        const previous = comparisonMap[c.key] || { views: 0, videoCount: 0 };
+        const previousViews = previous.views || 0;
+        const growth = c.views - previousViews;
+        const growthRate = previousViews ? (growth / previousViews * 100) : (c.views > 0 ? 100 : 0);
+
+        return Object.assign({}, c, {
+          previousViews,
+          previousVideoCount: previous.videoCount || 0,
+          growth,
+          growthRate,
+          latestViews: c.views,
+          isFallback: false,
+          isNewCreator: previousViews === 0 && c.views > 0
+        });
+      });
+    }
+
+    function liveBuildComparisonCreatorMap(scopedBeforePeriod, filters) {
+      let previousVideos = [];
+      const now = new Date();
+      const days = Number(filters.days || LIVE_CONFIG.recentDays || 30);
+
+      if (filters.period === 'RECENT') {
+        const currentStart = new Date(now);
+        currentStart.setDate(currentStart.getDate() - days);
+
+        const previousStart = new Date(currentStart);
+        previousStart.setDate(previousStart.getDate() - days);
+
+        previousVideos = scopedBeforePeriod.filter(v => {
+          const d = liveParseDate(v.publishedAt);
+          return d && d >= previousStart && d < currentStart;
+        });
+      } else if (filters.period === 'MONTH' && filters.month) {
+        const [year, month] = String(filters.month).split('-').map(Number);
+        if (year && month) {
+          const previousMonthDate = new Date(year, month - 2, 1);
+          const previousMonth = previousMonthDate.toISOString().slice(0, 7);
+          previousVideos = scopedBeforePeriod.filter(v => String(v.publishedAt || '').slice(0, 7) === previousMonth);
+        }
+      } else {
+        return {};
+      }
+
+      const map = {};
+      previousVideos.forEach(v => {
+        const key = liveCreatorKey(v);
+        if (!map[key]) map[key] = { views: 0, videoCount: 0 };
+        map[key].views += v.views;
+        map[key].videoCount += 1;
+      });
+
+      return map;
+    }
+
     function liveBuildRecommendedCreators(creators) {
       const maxViews = Math.max(1, ...creators.map(c => c.views));
       const maxAvg = Math.max(1, ...creators.map(c => c.avgViews));
@@ -3159,7 +3230,15 @@
         if (c.avgViews / maxAvg > .65) reasons.push('평균 조회수 우수');
         if (c.engagementRate / maxEng > .65) reasons.push('참여율 우수');
         if (!reasons.length) reasons.push('균형형 성과');
-        return Object.assign({}, c, { score, reasons, primaryReason: reasons[0], growth: 0, growthRate: 0 });
+        return Object.assign({}, c, {
+          score,
+          reasons,
+          primaryReason: reasons[0],
+          growth: c.growth || 0,
+          growthRate: c.growthRate || 0,
+          previousViews: c.previousViews || 0,
+          isNewCreator: !!c.isNewCreator
+        });
       });
     }
 
