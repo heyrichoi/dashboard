@@ -43,23 +43,25 @@
 
     .top {
       display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      align-items: start;
-      gap: 18px;
+      grid-template-columns: 64px minmax(0, 1fr);
+      align-items: center;
+      gap: 22px;
       margin-bottom: 18px;
     }
 
     .brand {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 12px;
-      min-width: 0;
+      width: 64px;
+      min-width: 64px;
     }
 
     .brand-home {
       cursor: pointer;
       border-radius: 22px;
-      padding: 4px 8px 4px 0;
+      padding: 4px;
       transition: transform .16s ease, background .16s ease;
     }
 
@@ -102,12 +104,13 @@
     .toolbar {
       display: flex;
       gap: 8px;
-      flex-wrap: nowrap;
-      justify-content: flex-end;
+      flex-wrap: wrap;
+      justify-content: flex-start;
       align-items: center;
       max-width: none;
       min-width: 0;
       width: 100%;
+      overflow: visible;
     }
 
     .toolbar select {
@@ -1758,6 +1761,248 @@
     }
 
 
+    .compare-page.hidden { display: none; }
+    .compare-page { margin-top: 16px; }
+    .compare-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff, #fff5f6);
+    }
+    .compare-header h2 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: -.05em;
+      font-weight: 950;
+    }
+    .compare-header p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .compare-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .compare-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .compare-control-card {
+      padding: 20px;
+    }
+    .compare-control-card h3 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      font-weight: 950;
+    }
+    .compare-control-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .compare-control-grid select, .compare-control-grid input {
+      width: 100%;
+      min-width: 0;
+    }
+    .compare-result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .compare-kpi {
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .compare-kpi .label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+    }
+    .compare-kpi .value {
+      margin-top: 8px;
+      font-size: 24px;
+      font-weight: 950;
+      letter-spacing: -.04em;
+    }
+    .compare-kpi .delta {
+      margin-top: 6px;
+      font-size: 12px;
+      font-weight: 850;
+    }
+    .compare-kpi .delta.up { color: #fa233c; }
+    .compare-kpi .delta.down { color: #2563eb; }
+    .compare-kpi .delta.flat { color: var(--muted); }
+    .compare-summary-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .compare-side-summary {
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .compare-side-summary .name {
+      font-size: 18px;
+      font-weight: 950;
+      margin-bottom: 8px;
+    }
+    .compare-side-summary .meta {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .compare-table-wrap { overflow-x: auto; }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+    }
+    .compare-table th, .compare-table td {
+      padding: 11px 10px;
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    .compare-table th {
+      color: var(--muted);
+      background: #fafbfe;
+      font-weight: 900;
+    }
+
+    .compare-insight-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .compare-insight-card {
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, #fff, #fff7f8);
+      box-shadow: var(--shadow);
+      min-height: 110px;
+    }
+    .compare-insight-card .label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+    }
+    .compare-insight-card .value {
+      margin-top: 8px;
+      font-size: 20px;
+      font-weight: 950;
+      letter-spacing: -.04em;
+    }
+    .compare-insight-card .desc {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .compare-visual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .compare-chart-card {
+      min-height: 360px;
+    }
+    .compare-chart-card canvas {
+      height: 275px !important;
+    }
+    .compare-video-list {
+      max-height: 330px;
+      overflow: auto;
+      display: grid;
+      gap: 10px;
+      padding-right: 2px;
+    }
+    .compare-video-item {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--soft);
+    }
+    .compare-video-rank {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--brand-soft);
+      color: var(--brand);
+      font-weight: 950;
+      font-size: 13px;
+    }
+    .compare-video-title {
+      font-weight: 900;
+      line-height: 1.35;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .compare-video-sub {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .compare-video-value {
+      font-weight: 950;
+      white-space: nowrap;
+      color: var(--text);
+    }
+
+    .compare-empty {
+      padding: 24px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 1260px) {
+      .compare-controls, .compare-summary-box, .compare-visual-grid { grid-template-columns: 1fr; }
+      .compare-result-grid, .compare-insight-grid { grid-template-columns: repeat(2, 1fr); }
+      .compare-control-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .compare-header { flex-direction: column; }
+      .compare-actions { justify-content: flex-start; }
+      .compare-result-grid, .compare-insight-grid { grid-template-columns: 1fr; }
+      .top { grid-template-columns: 56px minmax(0, 1fr); gap: 12px; }
+      .brand { width: 56px; min-width: 56px; }
+      .brand-logo { width: 50px; height: 50px; }
+    }
+
+
     @media print {
       body { background: #fff; }
       .no-print, .top, .main-only, .creator-page { display: none !important; }
@@ -1845,6 +2090,7 @@
         <button class="btn-ghost" onclick="exportSheet()">시트 내보내기</button>
         <button class="btn-ghost" onclick="exportPdf()">PDF 내보내기</button>
         <button class="btn-ghost" onclick="openMonthlyReport()">월간 리포트</button>
+        <button class="btn-ghost" onclick="openComparePage()">비교 분석</button>
         <select id="backfillMonths" title="YouTube 데이터를 지정 기간만큼 다시 가져옵니다.">
           <option value="">데이터 가져오기</option>
           <option value="6">최근 6개월</option>
@@ -2196,6 +2442,51 @@
       </div>
     </section>
 
+
+    <section class="compare-page hidden" id="comparePage">
+      <div class="card compare-header">
+        <div>
+          <h2>데이터 비교 분석</h2>
+          <p>월별, 기간별, 게임별, 유형별, 티어별, 크리에이터별 데이터를 A/B로 나눠 비교합니다.<br>예: 2026-05 vs 2026-06, VOD vs Shorts, CR vs BS, 특정 크리에이터 vs 전체.</p>
+        </div>
+        <div class="compare-actions">
+          <button class="btn-ghost" onclick="closeComparePage()">대시보드로 돌아가기</button>
+          <button onclick="renderComparePage()">비교 실행</button>
+        </div>
+      </div>
+
+      <div class="compare-controls">
+        <div class="card compare-control-card">
+          <h3>비교 A</h3>
+          <div class="compare-control-grid">
+            <input id="compareALabel" value="비교 A" placeholder="이름">
+            <select id="compareAGame" onchange="refreshCompareCreatorOptions('A')"></select>
+            <select id="compareAType"></select>
+            <select id="compareATier" onchange="refreshCompareCreatorOptions('A')"></select>
+            <select id="compareAPeriod" onchange="toggleCompareMonth('A')"></select>
+            <select id="compareAMonth" class="compare-month"></select>
+            <select id="compareACreator"></select>
+          </div>
+        </div>
+        <div class="card compare-control-card">
+          <h3>비교 B</h3>
+          <div class="compare-control-grid">
+            <input id="compareBLabel" value="비교 B" placeholder="이름">
+            <select id="compareBGame" onchange="refreshCompareCreatorOptions('B')"></select>
+            <select id="compareBType"></select>
+            <select id="compareBTier" onchange="refreshCompareCreatorOptions('B')"></select>
+            <select id="compareBPeriod" onchange="toggleCompareMonth('B')"></select>
+            <select id="compareBMonth" class="compare-month"></select>
+            <select id="compareBCreator"></select>
+          </div>
+        </div>
+      </div>
+
+      <div id="compareOutput">
+        <div class="compare-empty card">비교 조건을 설정한 뒤 “비교 실행”을 눌러주세요.</div>
+      </div>
+    </section>
+
     <section class="monthly-report-page hidden" id="monthlyReportPage">
       <div class="report-actions no-print">
         <button class="btn-ghost" onclick="closeMonthlyReport()">대시보드로 돌아가기</button>
@@ -2286,6 +2577,478 @@
     }
 
 
+    function openComparePage() {
+      closeMonthlyReport(false);
+      document.querySelectorAll('.main-only').forEach(el => el.classList.add('hidden'));
+      const creatorPage = document.getElementById('creatorPage');
+      if (creatorPage) creatorPage.classList.add('hidden');
+      const comparePage = document.getElementById('comparePage');
+      if (comparePage) comparePage.classList.remove('hidden');
+      ensureCompareControls();
+      renderComparePage();
+      window.scrollTo({ top: comparePage.offsetTop - 18, behavior: 'smooth' });
+    }
+
+    function closeComparePage() {
+      const comparePage = document.getElementById('comparePage');
+      if (comparePage) comparePage.classList.add('hidden');
+      document.querySelectorAll('.main-only').forEach(el => el.classList.remove('hidden'));
+      if (currentDashboardData) renderCreatorPage(currentDashboardData);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function ensureCompareControls() {
+      const aGame = document.getElementById('compareAGame');
+      if (!aGame || aGame.options.length) return;
+
+      const games = [
+        ['ALL', '전체 게임'], ['CR', 'CR'], ['BS', 'BS'], ['COC', 'COC'], ['OTHER', '기타']
+      ];
+      const types = [
+        ['ALL', '전체 유형'], ['VOD', 'VOD'], ['SHORTS', 'Shorts']
+      ];
+      const tiers = [
+        ['ALL', '전체 티어'], ['슈퍼', '슈퍼'], ['신뢰', '신뢰'], ['인증', '인증'], ['기타', '기타'], ['미분류', '미분류']
+      ];
+      const periods = [
+        ['RECENT', '최근 30일'], ['MONTH', '월별'], ['ALL', '전체 누적']
+      ];
+      const allData = liveBuildDashboardData({ game: 'ALL', type: 'ALL', tier: 'ALL', creator: 'ALL', period: 'ALL', days: 30 });
+      const months = allData.availableMonths || [];
+
+      ['A', 'B'].forEach(side => {
+        fillSelect(`compare${side}Game`, games);
+        fillSelect(`compare${side}Type`, types);
+        fillSelect(`compare${side}Tier`, tiers);
+        fillSelect(`compare${side}Period`, periods);
+        fillSelect(`compare${side}Month`, months.map(m => [m.month, `${m.month} · 영상 ${fmt(m.videoCount)}개`]));
+        document.getElementById(`compare${side}Period`).value = 'MONTH';
+      });
+
+      if (months[0]) document.getElementById('compareAMonth').value = months[0].month;
+      if (months[1]) document.getElementById('compareBMonth').value = months[1].month;
+      else if (months[0]) document.getElementById('compareBMonth').value = months[0].month;
+      document.getElementById('compareALabel').value = months[0] ? months[0].month : '비교 A';
+      document.getElementById('compareBLabel').value = months[1] ? months[1].month : '비교 B';
+
+      refreshCompareCreatorOptions('A');
+      refreshCompareCreatorOptions('B');
+      toggleCompareMonth('A');
+      toggleCompareMonth('B');
+    }
+
+    function fillSelect(id, items) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = items.map(item => `<option value="${escAttr(item[0])}">${esc(item[1])}</option>`).join('');
+    }
+
+    function toggleCompareMonth(side) {
+      const period = document.getElementById(`compare${side}Period`)?.value || 'RECENT';
+      const month = document.getElementById(`compare${side}Month`);
+      if (month) month.classList.toggle('hidden', period !== 'MONTH');
+      refreshCompareCreatorOptions(side);
+    }
+
+    function refreshCompareCreatorOptions(side) {
+      const creator = document.getElementById(`compare${side}Creator`);
+      if (!creator || !LIVE_RAW || !LIVE_RAW.videos) return;
+      const opts = getCompareOptions(side, true);
+      const data = liveBuildDashboardData(opts);
+      const current = creator.value || 'ALL';
+      creator.innerHTML = '<option value="ALL">전체 크리에이터</option>' + (data.creatorOptions || []).map(c =>
+        `<option value="${escAttr(c.key)}">${esc(c.label)} · ${short(c.views)}</option>`
+      ).join('');
+      creator.value = Array.from(creator.options).some(o => o.value === current) ? current : 'ALL';
+    }
+
+    function getCompareOptions(side, ignoreCreator = false) {
+      const period = document.getElementById(`compare${side}Period`)?.value || 'RECENT';
+      return {
+        game: document.getElementById(`compare${side}Game`)?.value || 'ALL',
+        type: document.getElementById(`compare${side}Type`)?.value || 'ALL',
+        tier: document.getElementById(`compare${side}Tier`)?.value || 'ALL',
+        creator: ignoreCreator ? 'ALL' : (document.getElementById(`compare${side}Creator`)?.value || 'ALL'),
+        period,
+        month: period === 'MONTH' ? (document.getElementById(`compare${side}Month`)?.value || '') : '',
+        days: 30
+      };
+    }
+
+    function getCompareLabel(side, data) {
+      const typed = String(document.getElementById(`compare${side}Label`)?.value || '').trim();
+      if (typed && typed !== `비교 ${side}`) return typed;
+      return getPeriodLabel(data.filters);
+    }
+
+    function renderComparePage() {
+      ensureCompareControls();
+      const output = document.getElementById('compareOutput');
+      if (!output) return;
+
+      const dataA = liveBuildDashboardData(getCompareOptions('A'));
+      const dataB = liveBuildDashboardData(getCompareOptions('B'));
+      const labelA = getCompareLabel('A', dataA);
+      const labelB = getCompareLabel('B', dataB);
+
+      output.innerHTML = `
+        <div class="compare-summary-box">
+          ${compareSideSummary(labelA, dataA)}
+          ${compareSideSummary(labelB, dataB)}
+        </div>
+
+        <div class="compare-result-grid">
+          ${compareKpiCard('조회수', dataA.totals.views, dataB.totals.views, 'short')}
+          ${compareKpiCard('영상 수', dataA.totals.videoCount, dataB.totals.videoCount, 'fmt')}
+          ${compareKpiCard('크리에이터 수', dataA.totals.creatorCount, dataB.totals.creatorCount, 'fmt')}
+          ${compareKpiCard('평균 조회수', avgViewsFromTotals(dataA), avgViewsFromTotals(dataB), 'short')}
+          ${compareKpiCard('참여율', dataA.totals.engagementRate, dataB.totals.engagementRate, 'pct')}
+          ${compareKpiCard('댓글 수', dataA.totals.comments, dataB.totals.comments, 'short')}
+        </div>
+
+        <div class="compare-insight-grid">
+          ${compareInsightCards(dataA, dataB, labelA, labelB)}
+        </div>
+
+        <section class="compare-visual-grid">
+          <div class="card panel compare-chart-card">
+            <h3>핵심 지표 비교</h3>
+            <canvas id="compareKpiChart"></canvas>
+          </div>
+          <div class="card panel compare-chart-card">
+            <h3>영상 유형별 조회수 비교</h3>
+            <canvas id="compareTypeChart"></canvas>
+          </div>
+        </section>
+
+        <section class="compare-visual-grid">
+          <div class="card panel compare-chart-card">
+            <h3>크리에이터 조회수 차이 TOP 10</h3>
+            <canvas id="compareDiffChart"></canvas>
+          </div>
+          <div class="card panel compare-chart-card">
+            <h3>평균 조회수 × 참여율 분포</h3>
+            <canvas id="compareScatterChart"></canvas>
+          </div>
+        </section>
+
+        <section class="compare-visual-grid">
+          <div class="card panel">
+            <h3>${esc(labelA)} TOP 영상</h3>
+            <div class="compare-video-list">${compareTopVideoList(dataA.topVideos || [])}</div>
+          </div>
+          <div class="card panel">
+            <h3>${esc(labelB)} TOP 영상</h3>
+            <div class="compare-video-list">${compareTopVideoList(dataB.topVideos || [])}</div>
+          </div>
+        </section>
+
+        <section class="card table-card">
+          <h3>크리에이터별 A/B 차이</h3>
+          <div class="compare-table-wrap">
+            ${compareCreatorTable(dataA, dataB, labelA, labelB)}
+          </div>
+        </section>
+      `;
+
+      renderCompareKpiChart(dataA, dataB, labelA, labelB);
+      renderCompareTypeChart(dataA, dataB, labelA, labelB);
+      renderCompareDiffChart(dataA, dataB, labelA, labelB);
+      renderCompareScatterChart(dataA, dataB, labelA, labelB);
+    }
+
+
+    function compareInsightCards(dataA, dataB, labelA, labelB) {
+      const winner = (a, b) => a > b ? labelA : (b > a ? labelB : '동률');
+      const avgA = avgViewsFromTotals(dataA);
+      const avgB = avgViewsFromTotals(dataB);
+      const topShareA = topCreatorShare(dataA);
+      const topShareB = topCreatorShare(dataB);
+      const shortsA = typeShare(dataA, 'Shorts');
+      const shortsB = typeShare(dataB, 'Shorts');
+      const cards = [
+        {
+          label: '조회수 우세',
+          value: winner(dataA.totals.views, dataB.totals.views),
+          desc: `${labelA} ${short(dataA.totals.views)} / ${labelB} ${short(dataB.totals.views)}`
+        },
+        {
+          label: '평균 조회수 우세',
+          value: winner(avgA, avgB),
+          desc: `${labelA} ${short(avgA)} / ${labelB} ${short(avgB)}`
+        },
+        {
+          label: '참여율 우세',
+          value: winner(dataA.totals.engagementRate, dataB.totals.engagementRate),
+          desc: `${labelA} ${pct(dataA.totals.engagementRate)} / ${labelB} ${pct(dataB.totals.engagementRate)}`
+        },
+        {
+          label: 'TOP 5 집중도',
+          value: topShareA >= topShareB ? `${labelA} 높음` : `${labelB} 높음`,
+          desc: `${labelA} ${topShareA.toFixed(1)}% / ${labelB} ${topShareB.toFixed(1)}% · 높을수록 상위 의존도 큼`
+        },
+        {
+          label: 'Shorts 조회수 비중',
+          value: shortsA >= shortsB ? `${labelA} 높음` : `${labelB} 높음`,
+          desc: `${labelA} ${shortsA.toFixed(1)}% / ${labelB} ${shortsB.toFixed(1)}%`
+        },
+        {
+          label: '업로드 활발도',
+          value: winner(dataA.totals.videoCount, dataB.totals.videoCount),
+          desc: `${labelA} ${fmt(dataA.totals.videoCount)}개 / ${labelB} ${fmt(dataB.totals.videoCount)}개`
+        },
+        {
+          label: '댓글 반응',
+          value: winner(dataA.totals.comments, dataB.totals.comments),
+          desc: `${labelA} ${short(dataA.totals.comments)} / ${labelB} ${short(dataB.totals.comments)}`
+        },
+        {
+          label: '분석 포인트',
+          value: getCompareKeyTakeaway(dataA, dataB, labelA, labelB),
+          desc: '조회수·효율·참여율 중 어디서 차이가 나는지 우선 확인하세요.'
+        }
+      ];
+      return cards.map(c => `
+        <div class="compare-insight-card">
+          <div class="label">${esc(c.label)}</div>
+          <div class="value">${esc(c.value)}</div>
+          <div class="desc">${esc(c.desc)}</div>
+        </div>
+      `).join('');
+    }
+
+    function getCompareKeyTakeaway(dataA, dataB, labelA, labelB) {
+      const viewDiff = Number(dataA.totals.views || 0) - Number(dataB.totals.views || 0);
+      const avgDiff = avgViewsFromTotals(dataA) - avgViewsFromTotals(dataB);
+      const engDiff = Number(dataA.totals.engagementRate || 0) - Number(dataB.totals.engagementRate || 0);
+      if (Math.abs(viewDiff) < 1 && Math.abs(avgDiff) < 1 && Math.abs(engDiff) < 0.01) return '큰 차이 없음';
+      if (viewDiff > 0 && avgDiff <= 0) return `${labelA} 물량 우세`;
+      if (viewDiff > 0 && avgDiff > 0) return `${labelA} 성과 우세`;
+      if (viewDiff < 0 && avgDiff >= 0) return `${labelB} 물량 우세`;
+      if (viewDiff < 0 && avgDiff < 0) return `${labelB} 성과 우세`;
+      return engDiff > 0 ? `${labelA} 참여 우세` : `${labelB} 참여 우세`;
+    }
+
+    function topCreatorShare(data) {
+      const views = Number(data?.totals?.views || 0);
+      if (!views) return 0;
+      const top = (data.creators || []).slice().sort((a, b) => b.views - a.views).slice(0, 5)
+        .reduce((sum, c) => sum + Number(c.views || 0), 0);
+      return top / views * 100;
+    }
+
+    function typeShare(data, typeName) {
+      const views = Number(data?.totals?.views || 0);
+      if (!views) return 0;
+      const target = liveNormalizeVideoType(typeName);
+      const value = (data.typePerformance || []).filter(t => liveNormalizeVideoType(t.type) === target)
+        .reduce((sum, t) => sum + Number(t.views || 0), 0);
+      return value / views * 100;
+    }
+
+    function compareCreatorDiffRows(dataA, dataB) {
+      const map = {};
+      (dataA.creators || []).forEach(c => { map[c.key] = Object.assign(map[c.key] || {}, { a: c, name: c.creatorName, game: c.game, tier: c.tier }); });
+      (dataB.creators || []).forEach(c => { map[c.key] = Object.assign(map[c.key] || {}, { b: c, name: c.creatorName, game: c.game, tier: c.tier }); });
+      return Object.values(map).map(x => {
+        const a = x.a || {};
+        const b = x.b || {};
+        const aViews = Number(a.views || 0);
+        const bViews = Number(b.views || 0);
+        const diff = aViews - bViews;
+        return Object.assign({}, x, { aViews, bViews, diff, diffRate: bViews ? diff / bViews * 100 : (aViews ? 100 : 0) });
+      });
+    }
+
+    function compareSideSummary(label, data) {
+      const filters = data.filters || {};
+      const creatorLabel = filters.creator === 'ALL' ? '전체 크리에이터' : ((data.creators && data.creators[0] && data.creators[0].creatorName) || '선택 크리에이터');
+      return `
+        <div class="compare-side-summary">
+          <div class="name">${esc(label)}</div>
+          <div class="meta">
+            ${esc(getPeriodLabel(filters))} · ${esc(filters.game)} · ${esc(filters.type)} · ${esc(filters.tier)} · ${esc(creatorLabel)}<br>
+            영상 ${fmt(data.totals.videoCount)}개 · 크리에이터 ${fmt(data.totals.creatorCount)}명 · 조회수 ${short(data.totals.views)}
+          </div>
+        </div>
+      `;
+    }
+
+    function compareKpiCard(label, a, b, format) {
+      const diff = Number(a || 0) - Number(b || 0);
+      const rate = Number(b || 0) ? diff / Number(b || 0) * 100 : (Number(a || 0) ? 100 : 0);
+      const cls = diff > 0 ? 'up' : (diff < 0 ? 'down' : 'flat');
+      const value = format === 'pct' ? pct(a) : (format === 'fmt' ? fmt(a) : short(a));
+      const diffValue = format === 'pct' ? `${diff > 0 ? '+' : ''}${diff.toFixed(2)}%p` : signedShort(diff);
+      return `
+        <div class="compare-kpi">
+          <div class="label">${esc(label)} · A 기준</div>
+          <div class="value">${esc(String(value))}</div>
+          <div class="delta ${cls}">${esc(diffValue)} / ${rate > 0 ? '+' : ''}${rate.toFixed(1)}% vs B</div>
+        </div>
+      `;
+    }
+
+    function avgViewsFromTotals(data) {
+      return data.totals.videoCount ? Math.round(data.totals.views / data.totals.videoCount) : 0;
+    }
+
+    function renderCompareKpiChart(dataA, dataB, labelA, labelB) {
+      renderManagedChart('compareKpiChart', {
+        type: 'bar',
+        data: {
+          labels: ['조회수', '평균 조회수', '영상 수', '참여율'],
+          datasets: [
+            { label: labelA, data: [dataA.totals.views, avgViewsFromTotals(dataA), dataA.totals.videoCount, dataA.totals.engagementRate], backgroundColor: '#fa233c', borderRadius: 8 },
+            { label: labelB, data: [dataB.totals.views, avgViewsFromTotals(dataB), dataB.totals.videoCount, dataB.totals.engagementRate], backgroundColor: '#2b303b', borderRadius: 8 }
+          ]
+        },
+        options: { responsive: true, plugins: { legend: { position: 'top' } }, scales: { y: { beginAtZero: true, ticks: { callback: v => short(v) } } } }
+      });
+    }
+
+    function renderCompareTypeChart(dataA, dataB, labelA, labelB) {
+      const types = Array.from(new Set([...(dataA.typePerformance || []).map(x => x.type), ...(dataB.typePerformance || []).map(x => x.type)])).filter(Boolean);
+      const mapA = Object.fromEntries((dataA.typePerformance || []).map(x => [x.type, x.views]));
+      const mapB = Object.fromEntries((dataB.typePerformance || []).map(x => [x.type, x.views]));
+      renderManagedChart('compareTypeChart', {
+        type: 'bar',
+        data: {
+          labels: types,
+          datasets: [
+            { label: labelA, data: types.map(t => mapA[t] || 0), backgroundColor: '#fa233c', borderRadius: 8 },
+            { label: labelB, data: types.map(t => mapB[t] || 0), backgroundColor: '#2b303b', borderRadius: 8 }
+          ]
+        },
+        options: { responsive: true, plugins: { legend: { position: 'top' } }, scales: { y: { beginAtZero: true, ticks: { callback: v => short(v) } } } }
+      });
+    }
+
+
+    function renderCompareDiffChart(dataA, dataB, labelA, labelB) {
+      const rows = compareCreatorDiffRows(dataA, dataB)
+        .filter(r => r.aViews || r.bViews)
+        .sort((x, y) => Math.abs(y.diff) - Math.abs(x.diff))
+        .slice(0, 10)
+        .reverse();
+      renderManagedChart('compareDiffChart', {
+        type: 'bar',
+        data: {
+          labels: rows.map(r => r.name || '-'),
+          datasets: [{
+            label: `${labelA} - ${labelB}`,
+            data: rows.map(r => r.diff),
+            backgroundColor: rows.map(r => r.diff >= 0 ? '#fa233c' : '#2563eb'),
+            borderRadius: 8
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: ctx => `${signedShort(ctx.raw)} 조회수 차이` } }
+          },
+          scales: {
+            x: { ticks: { callback: v => signedShort(v) } },
+            y: { ticks: { autoSkip: false } }
+          }
+        }
+      });
+    }
+
+    function renderCompareScatterChart(dataA, dataB, labelA, labelB) {
+      const toPoints = (data, sideLabel) => (data.creators || [])
+        .filter(c => c.videoCount > 0)
+        .map(c => ({
+          x: c.avgViews || 0,
+          y: c.engagementRate || 0,
+          r: Math.max(4, Math.min(16, Math.sqrt(c.views || 0) / 90)),
+          creatorName: c.creatorName,
+          sideLabel,
+          views: c.views,
+          videoCount: c.videoCount
+        }));
+      renderManagedChart('compareScatterChart', {
+        type: 'bubble',
+        data: {
+          datasets: [
+            { label: labelA, data: toPoints(dataA, labelA), backgroundColor: 'rgba(250,35,60,.42)', borderColor: '#fa233c' },
+            { label: labelB, data: toPoints(dataB, labelB), backgroundColor: 'rgba(43,48,59,.32)', borderColor: '#2b303b' }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'top' },
+            tooltip: {
+              callbacks: {
+                label: ctx => {
+                  const d = ctx.raw || {};
+                  return `${d.creatorName || '-'} · 평균 ${short(d.x)} · 참여율 ${pct(d.y)} · 총 ${short(d.views)} · 영상 ${fmt(d.videoCount)}개`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: { title: { display: true, text: '평균 조회수' }, ticks: { callback: v => short(v) } },
+            y: { title: { display: true, text: '참여율' }, ticks: { callback: v => `${v}%` }, beginAtZero: true }
+          }
+        }
+      });
+    }
+
+    function compareTopVideoList(videos) {
+      const top = (videos || []).slice(0, 8);
+      if (!top.length) return '<div class="compare-empty">영상 데이터 없음</div>';
+      return top.map((v, i) => `
+        <div class="compare-video-item" title="${escAttr(v.title || '')}">
+          <div class="compare-video-rank">${i + 1}</div>
+          <div style="min-width:0;">
+            <div class="compare-video-title">${esc(v.title || '-')}</div>
+            <div class="compare-video-sub">${esc(v.creatorName || '-')} · ${esc(v.type || '-')} · ${esc(v.publishedAt || '-')}</div>
+          </div>
+          <div class="compare-video-value">${short(v.views)}</div>
+        </div>
+      `).join('');
+    }
+
+    function compareCreatorTable(dataA, dataB, labelA, labelB) {
+      const rows = compareCreatorDiffRows(dataA, dataB)
+        .sort((x, y) => Math.abs(y.diff) - Math.abs(x.diff))
+        .slice(0, 50);
+
+      if (!rows.length) return '<div class="compare-empty">비교할 크리에이터 데이터가 없습니다.</div>';
+
+      return `
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>크리에이터</th><th>게임</th><th>티어</th><th>${esc(labelA)} 조회수</th><th>${esc(labelB)} 조회수</th><th>차이</th><th>증감률</th><th>A 영상</th><th>B 영상</th><th>A 참여율</th><th>B 참여율</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows.map(r => `
+              <tr>
+                <td><b>${esc(r.name || '-')}</b></td>
+                <td>${esc(r.game || '-')}</td>
+                <td>${esc(r.tier || '-')}</td>
+                <td>${short(r.aViews)}</td>
+                <td>${short(r.bViews)}</td>
+                <td>${signedShort(r.diff)}</td>
+                <td>${r.diffRate > 0 ? '+' : ''}${r.diffRate.toFixed(1)}%</td>
+                <td>${fmt(r.a?.videoCount || 0)}</td>
+                <td>${fmt(r.b?.videoCount || 0)}</td>
+                <td>${pct(r.a?.engagementRate || 0)}</td>
+                <td>${pct(r.b?.engagementRate || 0)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+
     function openMonthlyReport() {
       if (!currentDashboardData) {
         alert('아직 리포트로 만들 데이터가 없습니다. 먼저 새로고침을 눌러주세요.');
@@ -2317,6 +3080,8 @@
 
       const reportPage = document.getElementById('monthlyReportPage');
       const reportContent = document.getElementById('monthlyReportContent');
+      const comparePage = document.getElementById('comparePage');
+      if (comparePage) comparePage.classList.add('hidden');
 
       document.querySelectorAll('.main-only').forEach(el => el.classList.add('hidden'));
       const creatorPage = document.getElementById('creatorPage');
@@ -3499,6 +4264,9 @@
 
     function render(data) {
       currentDashboardData = data;
+      const comparePage = document.getElementById('comparePage');
+      if (comparePage) comparePage.classList.add('hidden');
+      document.querySelectorAll('.main-only').forEach(el => el.classList.remove('hidden'));
       populateCreatorFilter(data.creatorOptions || [], data.filters.creator || 'ALL');
       populateMonthFilter(data.availableMonths || [], data.filters.month || '');
 
